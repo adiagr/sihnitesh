@@ -95,8 +95,14 @@
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-           $.post("https://sih-project-final.firebaseio.com/buzzer.json",'1')//, function(data, status){
-          
+           
+          $.ajax({
+   type: 'PATCH',
+   url: 'https://sih-project-final.firebaseio.com/buzzer.json',
+   data: "1",
+
+   /* success and error handling omitted for brevity */
+});
           scanner.stop();
           $("#preview").hide();
           $("#main").show();
