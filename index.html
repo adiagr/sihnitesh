@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
   <head>
     <title>Robogyan Fiesta</title>
     <script type="text/javascript" src="instascan.min.js"></script>
@@ -73,6 +73,38 @@
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
           scanner.start(cameras[1]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instascan</title>
+    <script type="text/javascript" src="instascan.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <video id="preview"></video>
+    <script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+           $.post("https://sih-project-final.firebaseio.com/buzzer.json",'1')//, function(data, status){
+          
+          scanner.stop();
+          $("#preview").hide();
+          $("#main").show();
+        
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
         } else {
           console.error('No cameras found.');
         }
