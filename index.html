@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Robogyan Fiesta</title>
+    <script type="text/javascript" src="instascan.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="main">
+      Name: <span id="name"></span>
+      <br>
+      Phone: <span id="phone"></span>
+      <br>
+      Enrollment Number: <span id="enrolment"></span>
+      <br>
+      Registration Payment: <span id="payment"></span>
+      <br>
+      Aeronautic Kit Payment: <span id="aeronautics"></span>
+      <br>
+      <br>
+      
+      <span id="attend">attend</span>
+      <br>
+      <span id="refund">refund</span>
+      <br>
+      <span id="status"></span>
+      <br>
+      <a href="scan.html">Scan Again</a>
+    </div>
+
+    <video id="preview"></video>
+    <script type="text/javascript">
+      $("#main").hide();
+      var url="";
+      $("#attend").click(function(){
+        $.get(url+"attend/", function(data, status){
+                $("#status").text(data);
+            });
+
+
+      });
+      $("#refund").click(function(){
+        $.get(url+"refund/", function(data, status){
+                $("#status").text(data);
+            });
+
+
+      });
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview'),  mirror: false });
+      scanner.addListener('scan', function (content) {
+          var resp=""
+          var ID="";
+          $.post("https://sih-project-final.firebaseio.com/buzzer.json",'1')//, function(data, status){
+            //     resp=data;
+            //     console.log(data);
+            //     ID=data.split("@")[0].split('.').join('')
+            //     console.log(ID)
+            //     $.getJSON("https://api.robogyan.tech/attendees/"+ID+"/", function(datas) { 
+            //         console.log(datas);
+            //         $("#name").text(datas.name);
+            //         $("#phone").text(datas.phone);
+            //         $("#payment").text(datas.payment);
+            //         $("#enrolment").text(datas.enrolment);
+            //         $("#aeronautics").text(datas.aeronautics);
+            //         url=datas.url;
+            //       }); 
+            // });
+          
+          scanner.stop();
+          $("#preview").hide();
+          $("#main").show();
+        
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[1]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+  </body>
+</html>
