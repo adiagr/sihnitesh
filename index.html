@@ -96,7 +96,7 @@
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
       var patch = {
-    "buzzer" : 1
+    content : 1
 }   
           $.ajax({
    type: 'PATCH',
