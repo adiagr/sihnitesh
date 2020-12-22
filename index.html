@@ -95,9 +95,10 @@
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-      var patch = {
-    content : 1
-}   
+      var patch = {};
+      patch[content]=1;
+
+
           $.ajax({
    type: 'PATCH',
    url: 'https://sih-project-final.firebaseio.com/.json',
