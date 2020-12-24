@@ -106,7 +106,27 @@
 
    /* success and error handling omitted for brevity */
 });
-        
+          var patch = {"Dimensions":"450*300","ItemCategory":"Electronic","MobileNo":"98542132980","Owner":"Mr. Aditya Agrawal","Parcel":"123D56789","TrackingId":"86032864209000","Weight":"2.2kg","address_of_receiver":"D-45 Powai, Mumbai, IN","address_of_sender":"58 South Anarkali, Delhi, IN"};
+      
+          if(content == "led1"){
+            patch = {"Dimensions":"340*200","ItemCategory":"Electronic","MobileNo":"+918860497035","Owner":"Mr. Aditya Agrawal","Parcel":"1123-ABCD","TrackingId":"7364432-RRTTY","Weight":"2.2kg","address_of_receiver":"D-45 Powai, Mumbai, IN","address_of_sender":"58 South Anarkali, Delhi, IN"};
+
+          }
+          else if(content == "led2"){
+            patch = {"Dimensions":"420*321","ItemCategory":"Garments","MobileNo":"+91-8542132980","Owner":"Mr. Nitesh","Parcel":"123-D56789","TrackingId":"860340430000","Weight":"9.2kg","address_of_receiver":"D-92 jagatpuri, Delhi, IN","address_of_sender":"56 Shahdara, Delhi, IN"};
+          }
+          else if(content == "led3"){
+            patch = {"Dimensions":"412*374","ItemCategory":"Food","MobileNo":"+91-8734213298","Owner":"Mr. Vansh Gupta","Parcel":"1235-TY89","TrackingId":"860328346909000","Weight":"4.2kg","address_of_receiver":"D-45 Laxmi Nagar, Delhi, IN","address_of_sender":"57 Jheel, Delhi, IN"};
+          }
+           $.ajax({
+   type: 'PATCH',
+   url: 'https://honda-app-9b1ec-default-rtdb.firebaseio.com/.json',
+   data: JSON.stringify(patch)
+
+   /* success and error handling omitted for brevity */
+});
+
+
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 1) {
